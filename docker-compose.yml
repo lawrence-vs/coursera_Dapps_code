@@ -1,0 +1,11 @@
+services:
+  ibkr-charts:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: "${IMAGE_NAME}:${IMAGE_TAG}" # sets image name and version
+    container_name: "${CONTAINER_NAME}" # sets container name
+    environment:
+      IBKR_ACCOUNT_ID: "U15794033"
+    ports:
+      - "5055:5054"

@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+  "name": "ibkr-charts_ibkr-charts-dev", // TODO test if this if overrided by the container name in the compose file
+  "service": "ibkr-charts",
+  "dockerComposeFile": [
+    "./dev.docker-compose.yml"
+  ],
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "PKief.material-icon-theme",
+        "formulahendry.code-runner",
+        "aaron-bond.better-comments",
+        "alefragnani.Bookmarks",
+        "piotrpalarz.vscode-gitignore-generator",
+        "ms-azuretools.vscode-docker",
+        "EditorConfig.EditorConfig",
+        "usernamehw.errorlens",
+        "mhutchie.git-graph",
+        "donjayamanne.githistory",
+        "codezombiech.gitignore",
+        "wayou.vscode-todo-highlight",
+        "Gruntfuggly.todo-tree"
+      ]
+    }
+  }
+}
