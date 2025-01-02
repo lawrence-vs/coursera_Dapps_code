@@ -4,6 +4,6 @@ services:
       context: ../
       dockerfile: ./Dockerfile
     image: "${IMAGE_NAME}:${IMAGE_TAG}" # sets image name and version
-    container_name: "${CONTAINER_NAME}" # sets container name
+    container_name: "${CONTAINER_PREFIX}_${RANDOM_SUFFIX}" # sets container name
     ports:
       - "8545:3000"

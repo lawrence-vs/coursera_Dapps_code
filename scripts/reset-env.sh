@@ -2,7 +2,8 @@
 
 # Navigate to the parent directory (one level up) where .env is located
 ENV_FILE="./.env"
-PROJECT_DIR=$(cd "$PWD"/.. && pwd)
+# PROJECT_DIR=$(cd "$PWD"/.. && pwd)
+PROJECT_DIR=$(pwd)
 ## RESET SEED FOR CONTAINER NAME
 
 # Generate random hex value
