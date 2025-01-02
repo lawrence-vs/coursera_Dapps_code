@@ -1,6 +1,6 @@
 #!/bin/bash
 # Load environment variables from the .env file
-if [ -f "../.env" ]; then
+if [ -f "./.env" ]; then
   # Source the .env file to load the variables into the shell session
   export $(grep -v '^#' ../.env | xargs)
 else

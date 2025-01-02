@@ -1,8 +1,8 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  "name": "ibkr-charts_ibkr-charts-dev", // TODO test if this if overrided by the container name in the compose file
-  "service": "ibkr-charts",
+  "name": "coursera-blockchain-truffle-dev", // TODO test if this if overrided by the container name in the compose file
+  "service": "coursera-blockchain-truffle",
   "dockerComposeFile": [
     "./dev.docker-compose.yml"
   ],

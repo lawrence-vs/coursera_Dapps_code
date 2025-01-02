@@ -1,25 +1,35 @@
-FROM debian:trixie-20241202-slim
+# Build stage
+FROM --platform=linux/arm64 node:slim AS build
 
-# Update and upgrade packages
-RUN apt-get update && apt-get -y upgrade
-RUN apt-get install -y openjdk-17-jre-headless \
-  unzip curl procps vim net-tools aptitude \
-  python3 python3-pip python3.12-venv
-
-# We will put everything in the /app directory
+# Set the working directory
 WORKDIR /app
-# Download and unzip client portal gateway
-RUN mkdir gateway && cd gateway && \
-  curl -O https://download2.interactivebrokers.com/portal/clientportal.gw.zip && \
-  unzip clientportal.gw.zip && rm clientportal.gw.zip
 
-# Copy our config so that the gateway will use it
-COPY conf.yaml gateway/root/conf.yaml
-COPY /app app
-# COPY scripts/start.sh /app
+# Install essential build tools and dependencies using apt
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
+#   && apt-get update --fix-missing \
+#   && apt-get install -y --no-install-recommends \
+#   bash \
+#   git \
+#   python3 \
+#   make \
+#   g++ \
+#   && apt-get clean \
+#   && rm -rf /var/lib/apt/lists/*
 
-# Expose the port so we can connect
-EXPOSE 5055 5054
+# RUN npm install -g truffle hardhat ganache solc
 
-# Run the gateway
-# CMD sh ./start.sh
+# Slim Runtime Stage
+# FROM --platform=linux/arm64 node:slim
+
+# Set the working directory
+# WORKDIR /app
+
+# Copy global npm modules from the build stage
+# COPY --from=build /usr/local/lib/node_modules /usr/local/lib/node_modules
+# COPY --from=build /usr/local/bin /usr/local/bin
+
+# Expose necessary ports
+EXPOSE 8545 3000
+
+# Default command
+CMD ["bash"]

@@ -1,11 +1,9 @@
 services:
-  ibkr-charts:
+  coursera-blockchain-truffle:
     build:
       context: ../
       dockerfile: ./Dockerfile
-    image: ibkr-charts-image:0.2 # sets image name and version
-    container_name: "ibkr-charts"
-    environment:
-      IBKR_ACCOUNT_ID: "U15794033"
+    image: "${IMAGE_NAME}:${IMAGE_TAG}" # sets image name and version
+    container_name: "${CONTAINER_NAME}" # sets container name
     ports:
-      - "5055:5054"
+      - "8545:3000"
