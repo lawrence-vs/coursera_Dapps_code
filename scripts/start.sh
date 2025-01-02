@@ -1,3 +1,14 @@
-#cd gateway && sh bin/run.sh root/conf.yaml &
-#cd webapp && python3 -m venv venv && . venv/bin/activate && venv/bin/pip install -r requirements.txt
-#flask --app app run --debug -p 5056 -h 0.0.0.0
+#!/bin/bash
+# Load environment variables from the .env file
+if [ -f "./.env" ]; then
+  # Source the .env file to load the variables into the shell session
+  export $(grep -v '^#' ./.env | xargs)
+else
+  echo ".env file not found!"
+  exit 1
+fi
+
+echo "Starting container..."
+${CONTAINER_PREFIX}_${RANDOM_SUFFIX}
+
+docker start ${CONTAINER_PREFIX}_${RANDOM_SUFFIX}

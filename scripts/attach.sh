@@ -9,7 +9,7 @@ else
 fi
 
 echo "Attaching to the container..."
-echo "CONTAINER_NAME: ${CONTAINER_NAME}"
+${CONTAINER_PREFIX}_${RANDOM_SUFFIX}
 
-docker attach ${CONTAINER_NAME}
+docker attach ${CONTAINER_PREFIX}_${RANDOM_SUFFIX}
 # docker exec -it -v ${CONTAINER_NAME} /bin/bash

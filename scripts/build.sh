@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Generate unique suffix for the container name
-sh reset-env.sh
+sh /scripts/reset-env.sh
 
 # Load environment variables from the .env file
 if [ -f "./.env" ]; then
@@ -13,4 +13,4 @@ else
 fi
 
 # Build the image
-docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ../
+docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ./
