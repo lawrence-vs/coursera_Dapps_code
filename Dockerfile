@@ -1,28 +1,25 @@
 # Build stage
-FROM --platform=linux/arm64 node:slim AS build
+FROM --platform=linux/arm64 node:alpine AS build
 
 # Set the working directory
 WORKDIR /app
 
-# Install essential build tools and dependencies using apt
-# RUN apt-get clean && rm -rf /var/lib/apt/lists/* \
-#   && apt-get update --fix-missing \
-#   && apt-get install -y --no-install-recommends \
-#   bash \
-#   git \
-#   python3 \
-#   make \
-#   g++ \
-#   && apt-get clean \
-#   && rm -rf /var/lib/apt/lists/*
+# Install essential build tools and dependencies using apk
+RUN apk add --no-cache \
+  git \
+  python3 \
+  make \
+  g++ \
+  libstdc++
 
+# Install global npm tools
 # RUN npm install -g truffle hardhat ganache solc
 
-# Slim Runtime Stage
-# FROM --platform=linux/arm64 node:slim
+# Runtime stage
+FROM --platform=linux/arm64 node:alpine
 
 # Set the working directory
-# WORKDIR /app
+WORKDIR /app
 
 # Copy global npm modules from the build stage
 # COPY --from=build /usr/local/lib/node_modules /usr/local/lib/node_modules
@@ -32,4 +29,4 @@ WORKDIR /app
 EXPOSE 8545 3000
 
 # Default command
-CMD ["bash"]
+CMD ["/bin/sh"]

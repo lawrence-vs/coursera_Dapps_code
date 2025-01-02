@@ -9,6 +9,6 @@ else
 fi
 
 echo "Starting container..."
-${CONTAINER_PREFIX}_${RANDOM_SUFFIX}
+echo ${CONTAINER_PREFIX}_${RANDOM_SUFFIX}
 
 docker start ${CONTAINER_PREFIX}_${RANDOM_SUFFIX}

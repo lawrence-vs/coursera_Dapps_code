@@ -4,7 +4,6 @@
 ENV_FILE="./.env"
 PROJECT_DIR=$PWD
 # PROJECT_DIR=$(cd "$PWD"/.. && pwd)
-echo "${PROJECT_DIR}"
 
 # Generate random hex value
 RANDOM_SUFFIX=$(openssl rand -hex 4)
@@ -22,3 +21,9 @@ else
 fi
 
 echo "Updated .env with: ${VARIABLE}"
+
+export IMAGE_NAME="${IMAGE_NAME}"
+export IMAGE_TAG="${IMAGE_TAG}"
+export CONTAINER_PREFIX="${CONTAINER_PREFIX}"
+export CONTAINER_BASE="${CONTAINER_BASE}"
+export CONTAINER_NAME="${CONTAINER_PREFIX}_${RANDOM_SUFFIX}"
