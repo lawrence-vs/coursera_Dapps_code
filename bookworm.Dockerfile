@@ -1,5 +1,5 @@
 # Stage 1: Build stage
-FROM node:23.5.0-bullseye-slim AS build
+FROM --platform=linux/arm64 node:23.5.0-bullseye-slim AS build
 
 # Set environment variables
 ENV PYTHON=/usr/bin/python3 \
@@ -7,14 +7,13 @@ ENV PYTHON=/usr/bin/python3 \
 
 # Install Python and build tools
 # Install Python and build tools with fix for missing packages and cleaning cache
-RUN apt-get update -o Acquire::CompressionTypes::Order::=gz \
-  && apt-get install -y --no-install-recommends \
+RUN apt-get update \
+  && apt-get install -y \
+  build-essential \
   git \
   python3 \
   python3-pip \
   python-is-python3 \
-  make \
-  g++ \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get update --fix-missing \
@@ -39,7 +38,7 @@ COPY ./app /usr/src/app
 RUN npm install --production
 
 # Stage 2: Runtime stage
-FROM node:23.5.0-bullseye-slim
+FROM --platform=linux/arm64 node:23.5.0-bullseye-slim
 
 # Set environment variables
 ENV NODE_ENV=production \
