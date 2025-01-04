@@ -11,7 +11,7 @@ RUN apk add --no-cache \
   make \
   g++ \
   libstdc++ \
-  && npm install -g truffle hardhat ganache solc
+  && npm install -g truffle hardhat ganache@1.1.0 solc
 
 # Runtime stage
 FROM --platform=linux/arm64 node:23-alpine3.20

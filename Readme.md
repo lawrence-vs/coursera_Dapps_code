@@ -51,3 +51,9 @@ RUN apt-get update && apt-get install -y \
  python3-wheel
 
 RUN rm -rf /var/lib/apt/lists/\* && apt-get clean
+
+---
+
+docker build -t my-ethereum-image .
+docker run --rm -p 8545:8545 -p 30303:30303 my-ethereum-image
+docker run --rm my-ethereum-image
