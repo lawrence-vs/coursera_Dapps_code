@@ -22,6 +22,7 @@ fi
 
 echo "Updated .env with: ${VARIABLE}"
 
+export DOCKERFILE_NAME="${DOCKERFILE_NAME}"
 export IMAGE_NAME="${IMAGE_NAME}"
 export IMAGE_TAG="${IMAGE_TAG}"
 export CONTAINER_PREFIX="${CONTAINER_PREFIX}"

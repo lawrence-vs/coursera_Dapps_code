@@ -2,14 +2,14 @@ services:
   coursera-blockchain-service:
     build:
       context: ./
-      dockerfile: ./Dockerfile
+      dockerfile: ./${DOCKERFILE_NAME} # sets the Dockerfile name
     image: "${IMAGE_NAME}:${IMAGE_TAG}" # sets image name and version
     container_name: "${CONTAINER_PREFIX}_${RANDOM_SUFFIX}" # sets container name
     ports:
       - "8545:8545" # maps port 8545 from container to host
       - "3000:3000" # maps port 3000 from container to host
     volumes:
-      - ./:/app # mounts the current directory to the /app directory inside the container
+      - ./app:/app # mounts the current directory to the /app directory inside the container
     command: bash # runs bash interactively
     stdin_open: true # keeps the container open for interaction
     tty: true # allocates a pseudo-TTY to make it interactive
