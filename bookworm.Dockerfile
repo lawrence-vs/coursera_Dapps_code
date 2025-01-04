@@ -1,14 +1,24 @@
-# Stage 1: Build stage
-FROM --platform=linux/arm64 node:23.5.0-bullseye-slim AS build
+# Use the node:23.5.0-bullseye-slim image as base
+FROM node:23.5.0-bullseye-slim AS build
 
 # Set environment variables
 ENV PYTHON=/usr/bin/python3 \
   DEBIAN_FRONTEND=noninteractive
 
-# Install Python and build tools
-# Install Python and build tools with fix for missing packages and cleaning cache
-RUN apt-get update \
-  && apt-get install -y \
+# Update package lists and clean any old lists
+RUN rm -rf /var/lib/apt/lists/* && apt-get clean \
+  && apt-get update -o Acquire::CompressionTypes::Order::=gz
+
+# Fix missing packages and install build-essential, git, python3, pip, etc.
+RUN apt-get install -y \
+  libcurl3-gnutls \
+  python3-minimal \
+  libasan6 \
+  ca-certificates \
+  python3-distutils \
+  python3-setuptools \
+  python3-wheel \
+  && apt-get install -y --no-install-recommends --fix-missing \
   build-essential \
   git \
   python3 \
@@ -16,8 +26,7 @@ RUN apt-get update \
   python-is-python3 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
-  && apt-get update --fix-missing \
-  && npm config set python /usr/bin/python3
+  && apt-get update --fix-missing
 
 # Upgrade npm and install global npm packages
 RUN npm install -g npm@latest \
@@ -38,7 +47,7 @@ COPY ./app /usr/src/app
 RUN npm install --production
 
 # Stage 2: Runtime stage
-FROM --platform=linux/arm64 node:23.5.0-bullseye-slim
+FROM node:23.5.0-bullseye-slim
 
 # Set environment variables
 ENV NODE_ENV=production \
@@ -56,4 +65,4 @@ COPY --from=build /usr/src/app /usr/src/app
 EXPOSE 8545 3000
 
 # Default command
-CMD ["/bin/bash"]
+CMD ["node", "index.js"]
