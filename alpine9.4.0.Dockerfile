@@ -1,5 +1,5 @@
 ARG NODE_VERSION=9.4.0
-ARG ALPINE_VERSION=3.6.2
+ARG ALPINE_VERSION=3.6.5
 
 FROM node:${NODE_VERSION}-alpine AS node
 
@@ -9,6 +9,10 @@ COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
+
+# RUN node -v
+# RUN npm install -g yarn --force
+# RUN yarn -v
 
 # Set working directory
 WORKDIR /usr/src/app
