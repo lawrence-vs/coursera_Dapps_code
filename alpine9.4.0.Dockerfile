@@ -1,35 +1,42 @@
 ARG NODE_VERSION=9.4.0
 ARG ALPINE_VERSION=3.6.5
-ARG GETH_VERSION=v1.7.3
+ARG GETH_VERSION="v1.7.3"
 ARG GOLANG_VERSION=1.13
 
-# First stage: Build Geth
-FROM golang:1.13-alpine AS builder
+## First stage: Build Geth
+FROM golang:${GOLANG_VERSION}-alpine AS builder
+
+RUN apk add --no-cache \
+  git \
+  make \
+  gcc \
+  g++ \
+  libc-dev \
+  curl
 
 # Set the working directory for the Geth build
-WORKDIR /go/src/github.com/ethereum/go-ethereum
+WORKDIR /go/src/
+# Set Go to use Go modules
+ENV GO111MODULE=on
+ENV MAKEFLAGS="--debug=v"
 
-# Clone the Geth repository
-RUN git clone https://github.com/ethereum/go-ethereum .
+# Checkout the desired version ( Geth v1.7.3 in this case using go version 1.13)
+RUN git clone https://github.com/ethereum/go-ethereum && cd go-ethereum && git checkout ${GETH_VERSION}
+# RUN go get -v -d ./...
+RUN make V=1 geth
 
-# Checkout the desired version (v1.7.3 in this case)
-RUN git checkout ${GETH_VERSION}
-
-# Second stage: Build Node.js
+## Second stage: Build Node.js
 FROM node:${NODE_VERSION}-alpine AS node
 
-# Third stage: Final image
+## Third stage: Final image
 FROM alpine:${ALPINE_VERSION}
-
 # Copy the Geth binary from the builder stage
+COPY --from=builder /go/src/github.com/ethereum/go-ethereum/build/bin/geth /usr/local/bin/geth
+# Copy Node.js runtime from the first stage into the Alpine image
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
 COPY --from=node /usr/local/bin /usr/local/bin
-
-# RUN node -v
-# RUN npm install -g yarn --force
-# RUN yarn -v
 
 # Set working directory
 WORKDIR /usr/src/app
@@ -45,25 +52,14 @@ RUN apk add --no-cache \
   libc6-compat \
   curl \
   which \
-  util-linux \
-  && node -v && npm -v
+  util-linux
 
-# Install Ganache version 1.1.0-beta
-# RUN npm install -g ganache truffle@4.0.4
-# RUN npm install -g ganache-cli@1.1.0-beta
+# Copy the app directory into the container
 COPY ./app /usr/src/app
-# Install Geth (Go Ethereum)
-# RUN mkdir -p /usr/local/go/src/github.com/ethereum/go-ethereum \
-#   && git clone https://github.com/ethereum/go-ethereum /usr/local/go/src/github.com/ethereum/go-ethereum \
-#   && cd /usr/local/go/src/github.com/ethereum/go-ethereum \
-#   && git checkout tags/v1.7.3-stable \
-#   && make geth
+# Install the app's node dependencies
 WORKDIR /usr/src/app/EthereumWebInterface
 RUN npm install
-
 # Expose the necessary ports (Ganache's default is 8545)
 EXPOSE 8545 30303
-
 # Command to run Ganache and Geth
-# CMD ["sh", "-c", "ganache-cli --version && geth --version"]
-CMD ["/bin/sh"]
+CMD ["/bin/sh", "-c", "node --version && geth --version && python3 --version"]

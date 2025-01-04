@@ -13,4 +13,5 @@ else
 fi
 
 # Build the image
-docker build --no-cache -f ${DOCKERFILE_NAME} -t ${IMAGE_NAME}:${IMAGE_TAG} .
+docker build -f ${DOCKERFILE_NAME} -t ${IMAGE_NAME}:${IMAGE_TAG} .
+# docker build --no-cache -f ${DOCKERFILE_NAME} -t ${IMAGE_NAME}:${IMAGE_TAG} .
