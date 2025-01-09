@@ -4,6 +4,58 @@
 
 To be used in ibkr portfolio website
 
+---
+
+## Truffle container
+
+workdirectory should be /usr/src/app/course3
+
+```bash
+pwd
+```
+
+create test chain in course3 folder
+
+```bash
+truffle init
+```
+
+set solidity compiler to use version 0.4.18 in truffle-config file
+
+```bash
+cp ../examples/truffle-config.json .
+```
+
+copy truffle.js to direcotry with network name "development" and use test chain rpc port number
+
+```bash
+cp ../examples/truffle.js .
+```
+
+copy Ballot.sol to course3/contracts directory and compile smart contract
+
+```bash
+cp ../examples/Ballot.sol contracts && truffle compile
+```
+
+host test chain with truffle
+
+```bash
+truffle development
+```
+
+add the migrate config needed to deploy the smart contract to the test chain
+
+```bash
+cp ../examples/2_deploy_contracts.js
+```
+
+publish the smart contract to the test chain, add use the --reset flag to publish or override the existing smart contract on the node
+
+```bash
+truffle migrate --reset
+```
+
 ## Todo:
 
 - conf.yaml
