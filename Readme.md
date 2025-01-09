@@ -74,7 +74,7 @@ docker-compose up
 ### Getting a command line prompt
 
 ```
-docker exec -it ibkr bash
+docker exec --rm -it --name truffle-dev coursera-blockchain-image ash
 ```
 
 pull and dev a base image
