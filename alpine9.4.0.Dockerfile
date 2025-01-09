@@ -26,9 +26,6 @@ WORKDIR /usr/src/app
 # Install dependencies (for building and installing packages)
 RUN apk add --no-cache \
   python \
-  xvfb \
-  xvfb-run \
-  terminator \
   make \
   g++ \
   bash \
@@ -37,7 +34,8 @@ RUN apk add --no-cache \
   curl \
   which \
   vim \
-  util-linux
+  util-linux \
+  tmux
 
 # Copy the app directory into the container
 COPY ./app /usr/src/app
