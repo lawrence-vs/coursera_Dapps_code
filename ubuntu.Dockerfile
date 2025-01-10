@@ -31,8 +31,8 @@ RUN git clone https://github.com/ethereum/go-ethereum /usr/local/go/src/github.c
   && git checkout tags/v1.7.3-stable \
   && make geth
 
-# Expose the necessary ports (Ganache's default is 8545)
-EXPOSE 8545 30303
+# Expose the necessary ports (Ganache's default is 8545) , truffl eemo test chain is 9545
+EXPOSE 8545 9545 3000
 
 # Command to run Ganache and Geth
-CMD ["sh", "-c", "ganache-cli --version && geth --version"]
+CMD ["sh", "-c", "truffle version"]

@@ -8,4 +8,4 @@ else
   exit 1
 fi
 
-docker run --rm -it -v ./:/app -p 8545:8545 -p 3000:3000 --name ${CONTAINER_PREFIX}_${RANDOM_SUFFIX} ${IMAGE_NAME}:${IMAGE_TAG} /bin/sh
+docker run --rm -it -v ./:/app -p 9545:9545 -p 8545:8545 -p 3000:3000 --name ${CONTAINER_PREFIX}_${RANDOM_SUFFIX} ${IMAGE_NAME}:${IMAGE_TAG} /bin/sh

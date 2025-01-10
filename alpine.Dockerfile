@@ -42,7 +42,7 @@ RUN apk add --no-cache \
 COPY ./app /usr/src/app
 # Install the app's node dependencies
 WORKDIR /usr/src/app/course3
-# Expose the necessary ports (Ganache's default is 8545)
-EXPOSE 8545 30303
+# Expose the necessary ports (Ganache's default is 8545) , truffl eemo test chain is 9545
+EXPOSE 8545 9545 3000
 # Command to run Ganache and Geth
 CMD ["/bin/sh", "-c", "node --version"]

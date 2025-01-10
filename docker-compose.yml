@@ -6,7 +6,8 @@ services:
     image: "${IMAGE_NAME}:${IMAGE_TAG}" # sets image name and version
     container_name: "${CONTAINER_PREFIX}_${RANDOM_SUFFIX}" # sets container name
     ports:
-      - "8545:8545" # maps port 8545 from container to host
+      - "8545:8545" # maps port 9545 from container to host
+      - "9545:9545" # maps port 9545 from container to host
       - "3000:3000" # maps port 3000 from container to host
     volumes:
       - ./app:/usr/src/app # mounts the current directory to the /app directory inside the container
