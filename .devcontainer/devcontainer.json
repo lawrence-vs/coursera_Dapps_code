@@ -3,11 +3,11 @@
 {
   "name": "Coursera Blockchain Dev",
   "dockerComposeFile": [
-    "../.docker-compose.yml"
+    "../docker-compose.yml"
   ],
   "service": "coursera-blockchain-truffle",
   "workspaceFolder": "/usr/src/app",
-  "postCreateCommand": "pwd",
+  "postCreateCommand": "truffle version",
   "remoteUser": "root"
   // "customizations": {
   //   "vscode": {

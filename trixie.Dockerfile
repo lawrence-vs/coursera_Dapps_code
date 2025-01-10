@@ -1,7 +1,7 @@
 ARG NODE_VERSION="9.4.0"
 ARG BUILD_BASE="slim"
 ARG FINAL_BASE="bullseye-20241202-slim"
-ARG BUILD_PLATFORM="linux/amd64"
+ARG BUILD_PLATFORM="linux/arm64"
 ARG FINAL_PLATFORM="linux/arm64"
 
 # Use the node:23.5.0-bullseye-slim image as base
