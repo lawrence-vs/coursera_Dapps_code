@@ -1,30 +1,32 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/python
 {
-  "name": "coursera-blockchain-truffle-dev", // TODO test if this if overrided by the container name in the compose file
-  "service": "coursera-blockchain-truffle",
+  "name": "Coursera Blockchain Dev",
   "dockerComposeFile": [
-    "./dev.docker-compose.yml"
+    "../.docker-compose.yml"
   ],
-  "workspaceFolder": "/app",
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-python.python",
-        "PKief.material-icon-theme",
-        "formulahendry.code-runner",
-        "aaron-bond.better-comments",
-        "alefragnani.Bookmarks",
-        "piotrpalarz.vscode-gitignore-generator",
-        "ms-azuretools.vscode-docker",
-        "EditorConfig.EditorConfig",
-        "usernamehw.errorlens",
-        "mhutchie.git-graph",
-        "donjayamanne.githistory",
-        "codezombiech.gitignore",
-        "wayou.vscode-todo-highlight",
-        "Gruntfuggly.todo-tree"
-      ]
-    }
-  }
+  "service": "coursera-blockchain-truffle",
+  "workspaceFolder": "/usr/src/app",
+  "postCreateCommand": "pwd",
+  "remoteUser": "root"
+  // "customizations": {
+  //   "vscode": {
+  //     "extensions": [
+  //       "ms-python.python",
+  //       "PKief.material-icon-theme",
+  //       "formulahendry.code-runner",
+  //       "aaron-bond.better-comments",
+  //       "alefragnani.Bookmarks",
+  //       "piotrpalarz.vscode-gitignore-generator",
+  //       "ms-azuretools.vscode-docker",
+  //       "EditorConfig.EditorConfig",
+  //       "usernamehw.errorlens",
+  //       "mhutchie.git-graph",
+  //       "donjayamanne.githistory",
+  //       "codezombiech.gitignore",
+  //       "wayou.vscode-todo-highlight",
+  //       "Gruntfuggly.todo-tree"
+  //     ]
+  //   }
+  // }
 }

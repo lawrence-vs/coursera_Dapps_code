@@ -10,7 +10,7 @@ services:
       - "3000:3000" # maps port 3000 from container to host
     volumes:
       - ./app:/usr/src/app # mounts the current directory to the /app directory inside the container
-    command: /bin/ash # runs /bin/sh interactively
+    command: /bin/bash # runs /bin/sh interactively
     stdin_open: true # keeps the container open for interaction
     tty: true # allocates a pseudo-TTY to make it interactive
     restart: no # ensures that the container doesn't restart unless manually started
