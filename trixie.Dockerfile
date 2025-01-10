@@ -9,7 +9,7 @@ FROM --platform=${BUILD_PLATFORM} node:${NODE_VERSION}-${BUILD_BASE} AS build
 # Set environment to suppress prompts
 ENV DEBIAN_FRONTEND=noninteractive
 # install truffle and solc
-RUN npm install -g truffle@4.1.15 solc@0.4.18
+RUN npm install -g truffle@4.1.15 solc@0.4.18 solc@0.5.1
 RUN yarn install --production --no-progress
 
 # Final image

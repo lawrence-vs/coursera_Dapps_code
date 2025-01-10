@@ -10,7 +10,7 @@ FROM --platform=${BUILD_PLATFORM} node:${NODE_VERSION}-alpine AS node
 # To handle 'not get uid/gid'
 RUN npm config set unsafe-perm true
 RUN yarn install --production --no-progress
-RUN npm install -g truffle@4.1.15 solc@0.4.18
+RUN npm install -g truffle@4.1.15 solc@0.4.18 solc@0.5.1
 
 ## Third stage: Final image
 FROM --platform=${BUILD_PLATFORM} alpine:3.9.6
